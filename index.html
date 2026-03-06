@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Samar Saad's Dental Clinic</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream:#F7F3EE; --warm-white:#FDFAF6; --teal:#1A6B6B; --teal-light:#2A8A8A;
+    --teal-pale:#E8F4F4; --gold:#C9A96E; --dark:#1C2B2B; --text:#3D4F4F;
+    --border:#D4E4E4; --error:#B5453C;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;}
+  body.ar{font-family:'Tajawal',sans-serif;direction:rtl;}
+
+  /* ── LOGIN ── */
+  #login-screen{min-height:100vh;background:var(--dark);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+  #login-screen::before{content:'';position:absolute;top:-150px;right:-150px;width:600px;height:600px;background:radial-gradient(circle,rgba(26,107,107,0.35) 0%,transparent 70%);pointer-events:none;}
+  #login-screen::after{content:'';position:absolute;bottom:-150px;left:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(201,169,110,0.12) 0%,transparent 70%);pointer-events:none;}
+  .login-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(12px);border-radius:20px;padding:3rem 3.5rem;width:100%;max-width:420px;position:relative;z-index:1;box-shadow:0 24px 64px rgba(0,0,0,0.4);}
+  .login-logo{font-family:'Playfair Display',serif;color:var(--cream);font-size:1.1rem;text-align:center;margin-bottom:0.3rem;letter-spacing:0.02em;}
+  .ar .login-logo{font-family:'Tajawal',sans-serif;font-weight:700;}
+  .login-logo span{color:var(--gold);}
+  .login-tagline{text-align:center;color:#7A9898;font-size:0.82rem;margin-bottom:2.5rem;letter-spacing:0.05em;text-transform:uppercase;}
+  .ar .login-tagline{letter-spacing:0;text-transform:none;font-size:0.9rem;font-family:'Tajawal',sans-serif;}
+  .login-title{font-family:'Playfair Display',serif;color:var(--cream);font-size:1.8rem;text-align:center;margin-bottom:0.5rem;}
+  .ar .login-title{font-family:'Tajawal',sans-serif;font-weight:700;}
+  .login-sub{text-align:center;color:#7A9898;font-size:0.88rem;margin-bottom:2rem;}
+  .ar .login-sub{font-family:'Tajawal',sans-serif;font-size:0.95rem;}
+  .role-tabs{display:flex;background:rgba(255,255,255,0.06);border-radius:10px;padding:4px;gap:4px;margin-bottom:1.8rem;}
+  .role-tab{flex:1;padding:0.6rem;border:none;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;cursor:pointer;transition:all 0.2s;background:none;color:#7A9898;}
+  .ar .role-tab{font-family:'Tajawal',sans-serif;font-size:0.95rem;}
+  .role-tab.active{background:var(--teal);color:white;box-shadow:0 4px 12px rgba(26,107,107,0.35);}
+  .login-field{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.2rem;}
+  .login-field label{font-size:0.78rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#7A9898;}
+  .ar .login-field label{letter-spacing:0;text-transform:none;font-size:0.9rem;font-family:'Tajawal',sans-serif;}
+  .login-field input{padding:0.85rem 1rem;border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.95rem;color:var(--cream);background:rgba(255,255,255,0.07);outline:none;transition:border-color 0.2s,box-shadow 0.2s;}
+  .ar .login-field input{font-family:'Tajawal',sans-serif;font-size:1rem;}
+  .login-field input::placeholder{color:rgba(255,255,255,0.25);}
+  .login-field input:focus{border-color:var(--teal-light);box-shadow:0 0 0 3px rgba(26,107,107,0.2);}
+  .login-error{background:rgba(181,69,60,0.15);border:1px solid rgba(181,69,60,0.3);border-radius:8px;padding:0.7rem 1rem;color:#F09090;font-size:0.85rem;margin-bottom:1rem;display:none;}
+  .ar .login-error{font-family:'Tajawal',sans-serif;font-size:0.95rem;}
+  .btn-login{width:100%;padding:1rem;background:var(--teal);color:white;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:500;cursor:pointer;transition:all 0.2s;letter-spacing:0.03em;box-shadow:0 4px 16px rgba(26,107,107,0.3);}
+  .ar .btn-login{font-family:'Tajawal',sans-serif;letter-spacing:0;font-size:1.05rem;}
+  .btn-login:hover{background:var(--teal-light);transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,107,107,0.4);}
+  .btn-login:disabled{opacity:0.55;cursor:not-allowed;transform:none;}
+  .login-lang-btn{display:block;margin:1.5rem auto 0;background:none;border:1px solid rgba(201,169,110,0.3);color:var(--gold);font-family:'Tajawal',sans-serif;font-size:0.85rem;padding:0.4rem 1.2rem;border-radius:50px;cursor:pointer;transition:all 0.2s;}
+  .login-lang-btn:hover{background:rgba(201,169,110,0.1);}
+
+  /* ── APP ── */
+  #app{display:none;}
+  header{background:var(--dark);padding:0 4rem;display:flex;align-items:center;justify-content:space-between;height:72px;position:sticky;top:0;z-index:100;gap:1rem;}
+  .logo{font-family:'Playfair Display',serif;color:var(--cream);font-size:1.1rem;letter-spacing:0.02em;white-space:nowrap;line-height:1.3;}
+  .ar .logo{font-family:'Tajawal',sans-serif;font-size:1.1rem;letter-spacing:0;font-weight:700;}
+  .logo span{color:var(--gold);}
+  .logo small{display:block;font-size:0.65rem;color:#7A9898;letter-spacing:0.12em;text-transform:uppercase;font-family:'DM Sans',sans-serif;}
+  .ar .logo small{font-family:'Tajawal',sans-serif;letter-spacing:0;text-transform:none;font-size:0.75rem;}
+  nav{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:flex-end;align-items:center;}
+  nav button{background:none;border:none;color:#A0B8B8;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:0.5rem 1.2rem;cursor:pointer;border-radius:4px;transition:all 0.2s;white-space:nowrap;}
+  .ar nav button{font-family:'Tajawal',sans-serif;letter-spacing:0;text-transform:none;font-size:0.95rem;}
+  nav button:hover{color:var(--cream);background:rgba(255,255,255,0.08);}
+  nav button.active{color:var(--gold);background:rgba(201,169,110,0.12);}
+  .lang-btn{background:rgba(201,169,110,0.15)!important;border:1px solid rgba(201,169,110,0.35)!important;color:var(--gold)!important;font-family:'Tajawal',sans-serif!important;font-size:0.9rem!important;letter-spacing:0!important;text-transform:none!important;padding:0.45rem 1rem!important;border-radius:50px!important;transition:all 0.2s;}
+  .lang-btn:hover{background:rgba(201,169,110,0.28)!important;transform:none!important;}
+  .logout-btn{background:rgba(181,69,60,0.15)!important;border:1px solid rgba(181,69,60,0.3)!important;color:#F09090!important;font-size:0.8rem!important;letter-spacing:0.05em!important;padding:0.45rem 1rem!important;border-radius:50px!important;font-family:'DM Sans',sans-serif!important;text-transform:uppercase!important;cursor:pointer;transition:all 0.2s;}
+  .ar .logout-btn{font-family:'Tajawal',sans-serif!important;letter-spacing:0!important;text-transform:none!important;font-size:0.9rem!important;}
+  .logout-btn:hover{background:rgba(181,69,60,0.28)!important;}
+  .role-badge{background:rgba(201,169,110,0.12);border:1px solid rgba(201,169,110,0.25);color:var(--gold);font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.8rem;border-radius:50px;font-family:'DM Sans',sans-serif;white-space:nowrap;}
+  .ar .role-badge{font-family:'Tajawal',sans-serif;letter-spacing:0;text-transform:none;font-size:0.82rem;}
+
+  .hero{background:var(--dark);padding:4rem 4rem 5rem;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(26,107,107,0.3) 0%,transparent 70%);pointer-events:none;}
+  .ar .hero::before{right:auto;left:-100px;}
+  .hero-tag{display:inline-block;background:rgba(201,169,110,0.15);color:var(--gold);font-size:0.75rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;padding:0.4rem 1rem;border-radius:50px;border:1px solid rgba(201,169,110,0.3);margin-bottom:1.2rem;}
+  .ar .hero-tag{letter-spacing:0;text-transform:none;font-size:0.9rem;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.2rem);color:var(--cream);line-height:1.15;max-width:600px;margin-bottom:1rem;}
+  .ar .hero h1{font-family:'Tajawal',sans-serif;font-weight:700;line-height:1.4;}
+  .hero h1 em{color:var(--gold);font-style:italic;}
+  .ar .hero h1 em{font-style:normal;}
+  .hero p{color:#7A9898;font-size:1rem;max-width:440px;line-height:1.7;}
+
+  .main-container{max-width:1100px;margin:0 auto;padding:3rem 2rem 5rem;}
+  .tabs{display:flex;background:var(--warm-white);border:1px solid var(--border);border-radius:12px;padding:6px;gap:4px;margin-bottom:2.5rem;max-width:480px;box-shadow:0 2px 12px rgba(0,0,0,0.04);}
+  .tab-btn{flex:1;padding:0.75rem 1.5rem;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.9rem;font-weight:500;cursor:pointer;transition:all 0.25s;background:none;color:var(--text);opacity:0.6;}
+  .ar .tab-btn{font-family:'Tajawal',sans-serif;font-size:1rem;}
+  .tab-btn.active{background:var(--teal);color:white;opacity:1;box-shadow:0 4px 16px rgba(26,107,107,0.25);}
+  .panel{display:none;animation:fadeIn 0.3s ease;}
+  .panel.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+  .card{background:var(--warm-white);border:1px solid var(--border);border-radius:16px;padding:2.5rem;box-shadow:0 4px 24px rgba(0,0,0,0.04);}
+  .card-title{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--dark);margin-bottom:0.4rem;}
+  .ar .card-title{font-family:'Tajawal',sans-serif;font-weight:700;}
+  .card-subtitle{color:#7A9898;font-size:0.9rem;margin-bottom:2rem;line-height:1.6;}
+  .ar .card-subtitle{font-size:1rem;}
+
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+  .form-grid .full{grid-column:1/-1;}
+  .field{display:flex;flex-direction:column;gap:0.5rem;}
+  label{font-size:0.8rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--teal);}
+  .ar label{letter-spacing:0;text-transform:none;font-size:0.9rem;font-family:'Tajawal',sans-serif;}
+  input,select,textarea{padding:0.8rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.95rem;color:var(--dark);background:white;transition:border-color 0.2s,box-shadow 0.2s;outline:none;width:100%;}
+  .ar input,.ar select,.ar textarea{font-family:'Tajawal',sans-serif;font-size:1rem;}
+  input:focus,select:focus,textarea:focus{border-color:var(--teal-light);box-shadow:0 0 0 3px rgba(26,107,107,0.1);}
+  input::placeholder,textarea::placeholder{color:#B0C4C4;}
+  textarea{resize:vertical;min-height:90px;}
+  .section-divider{display:flex;align-items:center;gap:1rem;margin:1.8rem 0 1.2rem;}
+  .section-divider span{font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--teal);white-space:nowrap;}
+  .ar .section-divider span{font-family:'Tajawal',sans-serif;font-size:1.05rem;}
+  .section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
+  .btn-primary{background:var(--teal);color:white;border:none;padding:1rem 2.5rem;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;cursor:pointer;transition:all 0.2s;margin-top:1.5rem;letter-spacing:0.03em;box-shadow:0 4px 16px rgba(26,107,107,0.2);}
+  .ar .btn-primary{font-family:'Tajawal',sans-serif;letter-spacing:0;font-size:1.05rem;}
+  .btn-primary:hover{background:var(--teal-light);transform:translateY(-1px);box-shadow:0 6px 20px rgba(26,107,107,0.3);}
+  .btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+
+  .apt-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+  .calendar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;}
+  .cal-nav{background:none;border:1.5px solid var(--border);width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1rem;color:var(--teal);transition:all 0.2s;display:flex;align-items:center;justify-content:center;}
+  .cal-nav:hover{background:var(--teal-pale);border-color:var(--teal);}
+  .cal-month{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--dark);}
+  .ar .cal-month{font-family:'Tajawal',sans-serif;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+  .cal-day-name{text-align:center;font-size:0.7rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:#7A9898;padding:0.4rem 0;}
+  .ar .cal-day-name{letter-spacing:0;text-transform:none;font-family:'Tajawal',sans-serif;font-size:0.8rem;}
+  .cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:0.85rem;cursor:pointer;transition:all 0.15s;border:1.5px solid transparent;color:var(--dark);}
+  .cal-day:hover:not(.empty):not(.past){background:var(--teal-pale);border-color:var(--teal-light);color:var(--teal);}
+  .cal-day.selected{background:var(--teal);color:white;border-color:var(--teal);}
+  .cal-day.today{border-color:var(--gold);color:var(--teal);font-weight:700;}
+  .cal-day.empty,.cal-day.past{cursor:default;}
+  .cal-day.past{color:#C8D8D8;}
+  .time-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;margin-top:1rem;}
+  .slot{padding:0.6rem;border:1.5px solid var(--border);border-radius:8px;text-align:center;font-size:0.8rem;cursor:pointer;transition:all 0.15s;background:white;color:var(--dark);}
+  .slot:hover:not(.taken){border-color:var(--teal-light);color:var(--teal);background:var(--teal-pale);}
+  .slot.selected-slot{background:var(--teal);border-color:var(--teal);color:white;}
+  .slot.taken{background:#F0F0F0;color:#C0C0C0;cursor:not-allowed;text-decoration:line-through;}
+
+  .patients-table-wrap{overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;font-size:0.9rem;}
+  .ar table{font-family:'Tajawal',sans-serif;font-size:1rem;}
+  thead th{text-align:left;font-size:0.75rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal);padding:0.75rem 1rem;border-bottom:2px solid var(--border);}
+  .ar thead th{text-align:right;letter-spacing:0;text-transform:none;font-size:0.85rem;}
+  tbody tr{border-bottom:1px solid var(--border);transition:background 0.15s;}
+  tbody tr:hover{background:var(--teal-pale);}
+  tbody td{padding:0.85rem 1rem;color:var(--dark);}
+  .ar tbody td{text-align:right;}
+  .badge{display:inline-block;padding:0.2rem 0.7rem;border-radius:50px;font-size:0.75rem;font-weight:500;}
+  .badge-confirmed{background:#E8F5EE;color:#2A7A5A;}
+  /* Appointment type buttons */
+  .apt-type-btn {
+    display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+    padding:1.2rem 2rem;border:2px solid var(--border);border-radius:14px;
+    background:white;cursor:pointer;transition:all 0.2s;min-width:160px;
+    font-family:'DM Sans',sans-serif;font-size:0.95rem;font-weight:500;color:var(--dark);
+  }
+  .ar .apt-type-btn{font-family:'Tajawal',sans-serif;font-size:1rem;}
+  .apt-type-btn .apt-type-icon{font-size:1.8rem;line-height:1;}
+  .apt-type-btn:hover{border-color:var(--teal-light);background:var(--teal-pale);color:var(--teal);}
+  .apt-type-btn.selected{border-color:var(--teal);background:var(--teal);color:white;box-shadow:0 4px 16px rgba(26,107,107,0.25);}
+  .apt-type-btn.selected:hover{background:var(--teal-light);}
+
+  /* Patient record info grid */
+  .pr-info-item{display:flex;flex-direction:column;gap:0.15rem;}
+  .pr-info-label{font-size:0.72rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--teal);opacity:0.8;}
+  .ar .pr-info-label{letter-spacing:0;text-transform:none;font-size:0.82rem;}
+  .pr-info-value{font-size:0.9rem;color:var(--dark);}
+  .pr-prev-row{padding:0.5rem 0;border-bottom:1px solid var(--border);display:flex;gap:1rem;flex-wrap:wrap;}
+  .pr-prev-row:last-child{border-bottom:none;}
+  .badge-consult{background:#EEF4FF;color:#3B6DD4;}
+  .badge-new{background:#E8F5EE;color:#2A7A5A;}
+
+  /* Export / Import buttons in header */
+  .export-btn{background:rgba(201,169,110,0.15)!important;border:1px solid rgba(201,169,110,0.35)!important;color:var(--gold)!important;font-family:'DM Sans',sans-serif!important;font-size:0.8rem!important;letter-spacing:0.05em!important;text-transform:uppercase!important;padding:0.45rem 1rem!important;border-radius:50px!important;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+  .export-btn:hover{background:rgba(201,169,110,0.28)!important;}
+  .import-btn{background:rgba(42,138,138,0.15)!important;border:1px solid rgba(42,138,138,0.35)!important;color:var(--teal-light)!important;font-family:'DM Sans',sans-serif!important;font-size:0.8rem!important;letter-spacing:0.05em!important;text-transform:uppercase!important;padding:0.45rem 1rem!important;border-radius:50px!important;cursor:pointer;transition:all 0.2s;white-space:nowrap;display:inline-block;}
+  .import-btn:hover{background:rgba(42,138,138,0.28)!important;}
+  .ar .export-btn,.ar .import-btn{font-family:'Tajawal',sans-serif!important;letter-spacing:0!important;text-transform:none!important;font-size:0.88rem!important;}
+
+  .attend-btn{display:inline-flex;align-items:center;gap:0.35rem;padding:0.28rem 0.85rem;border-radius:50px;font-size:0.78rem;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;font-family:inherit;white-space:nowrap;}
+  .attend-btn.attended{background:#E8F5EE;color:#2A7A5A;box-shadow:0 0 0 1.5px #A8D8BC inset;}
+  .attend-btn.attended:hover{background:#d0eddc;}
+  .attend-btn.not-attended{background:#FEF1E8;color:#C9621A;box-shadow:0 0 0 1.5px #F5C9A0 inset;}
+  .attend-btn.not-attended:hover{background:#fde4cc;}
+  .ar .attend-btn{font-family:'Tajawal',sans-serif;font-size:0.88rem;}
+  .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-bottom:2rem;}
+  .stat-card{background:var(--warm-white);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;}
+  .stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--teal);line-height:1;margin-bottom:0.3rem;}
+  .stat-label{font-size:0.8rem;color:#7A9898;text-transform:uppercase;letter-spacing:0.08em;font-weight:500;}
+  .ar .stat-label{text-transform:none;letter-spacing:0;font-family:'Tajawal',sans-serif;font-size:0.9rem;}
+
+  .toast{position:fixed;bottom:2rem;right:2rem;background:var(--dark);color:var(--cream);padding:1rem 1.5rem;border-radius:12px;font-size:0.9rem;box-shadow:0 8px 32px rgba(0,0,0,0.2);transform:translateY(100px);opacity:0;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);z-index:9998;border-left:4px solid var(--gold);max-width:300px;}
+  .ar .toast{right:auto;left:2rem;border-left:none;border-right:4px solid var(--gold);font-family:'Tajawal',sans-serif;}
+  .toast.show{transform:translateY(0);opacity:1;}
+  .toast strong{color:var(--gold);display:block;margin-bottom:0.2rem;}
+  .required{color:var(--error);margin-left:2px;}
+  .empty-state{text-align:center;padding:3rem;color:#7A9898;}
+  .empty-state .icon{font-size:3rem;margin-bottom:1rem;opacity:0.4;}
+
+  @media(max-width:768px){
+    header{padding:0.8rem 1rem;height:auto;flex-wrap:wrap;}
+    .hero{padding:2.5rem 1.5rem 3.5rem;}
+    .main-container{padding:2rem 1rem 4rem;}
+    .form-grid{grid-template-columns:1fr;}
+    .apt-layout{grid-template-columns:1fr;}
+    .stats-row{grid-template-columns:1fr;}
+    .card{padding:1.5rem;}
+    nav button{padding:0.4rem 0.6rem;font-size:0.78rem;}
+    .login-card{padding:2rem 1.5rem;margin:1rem;}
+  }
+</style>
+</head>
+<body id="body">
+
+<!-- ════ LOGIN ════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo" id="ll-logo">Dr. <span>Samar Saad's</span> Dental Clinic</div>
+    <div class="login-tagline" id="ll-tagline">Staff Portal</div>
+    <h2 class="login-title" id="ll-title">Welcome Back</h2>
+    <p class="login-sub" id="ll-sub">Sign in to your account to continue</p>
+    <div class="role-tabs">
+      <button class="role-tab active" onclick="selectRole('doctor',this)" id="rt-doctor">🩺 Doctor</button>
+      <button class="role-tab" onclick="selectRole('assistant',this)" id="rt-assistant">🗂 Assistant</button>
+    </div>
+    <div class="login-field">
+      <label id="ll-user-lbl">Username</label>
+      <input type="text" id="login-user" placeholder="Username" autocomplete="username" />
+    </div>
+    <div class="login-field">
+      <label id="ll-pass-lbl">Password</label>
+      <input type="password" id="login-pass" placeholder="••••••••" autocomplete="current-password" />
+    </div>
+    <div class="login-error" id="login-error">Incorrect username or password.</div>
+    <button class="btn-login" onclick="doLogin()" id="ll-btn">Sign In</button>
+    <button class="login-lang-btn" onclick="toggleLang()" id="login-lang-btn">🌐 العربية</button>
+  </div>
+</div>
+
+<!-- ════ APP ════ -->
+<div id="app">
+  <header>
+    <div class="logo" id="logo-text">
+      Dr. <span>Samar Saad's</span> Dental Clinic
+      <small id="logo-sub">Patient Management System</small>
+    </div>
+    <nav>
+      <button class="active" onclick="showTab('register',this)" data-key="navRegister" id="nav-register">Register</button>
+      <button onclick="showTab('appointment',this)" data-key="navAppointment" id="nav-appointment">Appointment</button>
+      <button onclick="showTab('dashboard',this)" data-key="navDashboard" id="nav-dashboard">Dashboard</button>
+      <span class="role-badge" id="role-badge-display">Doctor</span>
+      <button class="export-btn" onclick="exportJSON()" id="btn-export">⬇ Export</button>
+      <label class="import-btn" id="lbl-import">⬆ Import<input type="file" accept=".json" onchange="importJSON(event)" style="display:none;"></label>
+      <button class="lang-btn" onclick="toggleLang()" id="lang-btn">🌐 العربية</button>
+      <button class="logout-btn" onclick="doLogout()" id="logout-btn">Logout</button>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="hero-tag" id="hero-tag">✦ Patient Portal</div>
+    <h1 id="hero-h1">Your Smile,<br><em>Our Priority</em></h1>
+    <p id="hero-p">Manage patient records and appointments for Dr. Samar Saad's clinic with ease.</p>
+  </div>
+
+  <div class="main-container">
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showPanel('register',this)" data-key="tabRegister">Register</button>
+      <button class="tab-btn" onclick="showPanel('appointment',this)" data-key="tabAppointment">Appointment</button>
+      <button class="tab-btn" onclick="showPanel('dashboard',this)" data-key="tabDashboard" id="tab-dashboard">Dashboard</button>
+    </div>
+
+    <!-- REGISTER -->
+    <div id="panel-register" class="panel active">
+      <div class="card">
+        <h2 class="card-title" id="reg-title">Patient Registration</h2>
+        <p class="card-subtitle" id="reg-subtitle">Please fill in the patient's information. Fields marked <span class="required">*</span> are required.</p>
+        <div class="form-grid">
+          <div class="field"><label id="lbl-fname">First Name <span class="required">*</span></label><input type="text" id="fname" placeholder="Samar" /></div>
+          <div class="field"><label id="lbl-lname">Last Name <span class="required">*</span></label><input type="text" id="lname" placeholder="Hassan" /></div>
+          <div class="field"><label id="lbl-dob">Age <span class="required">*</span></label><input type="number" id="dob" placeholder="30" min="1" max="120" /></div>
+          <div class="field">
+            <label id="lbl-gender">Gender <span class="required">*</span></label>
+            <select id="gender">
+              <option value="" id="og0">Select gender</option>
+              <option id="og1">Male</option><option id="og2">Female</option>
+              <option id="og3">Other</option><option id="og4">Prefer not to say</option>
+            </select>
+          </div>
+          <div class="field"><label id="lbl-phone">Phone Number <span class="required">*</span></label><input type="tel" id="phone" placeholder="01012345678" maxlength="11" /></div>
+          <div class="field"><label id="lbl-email">Email Address</label><input type="email" id="email" placeholder="patient@email.com" /></div>
+          <div class="field full"><label id="lbl-address">Home Address</label><input type="text" id="address" placeholder="Street, City, Governorate" /></div>
+          <div class="field full"><label id="lbl-natid">National ID</label><input type="text" id="natid" placeholder="1234567890123" /></div>
+          <div class="section-divider full"><span id="sec-medical">Medical History</span></div>
+          <div class="field full"><label id="lbl-allergies">Known Allergies</label><input type="text" id="allergies" placeholder="e.g., Penicillin, Latex, None" /></div>
+          <div class="field full"><label id="lbl-meds">Current Medications</label><input type="text" id="meds" placeholder="List any medications currently taken" /></div>
+          <div class="field full"><label id="lbl-conditions">Medical Conditions / Notes</label><textarea id="conditions" placeholder="Diabetes, hypertension, heart conditions..."></textarea></div>
+          <div class="full"><button class="btn-primary" onclick="registerPatient()" id="btn-register">✦ Register Patient</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- APPOINTMENT -->
+    <div id="panel-appointment" class="panel">
+      <div class="card">
+        <h2 class="card-title" id="apt-title">Book Appointment</h2>
+        <p class="card-subtitle" id="apt-subtitle">Choose appointment type, then select a patient.</p>
+
+        <!-- Step 1: type chooser -->
+        <div id="apt-type-chooser" style="margin-bottom:2rem;">
+          <div id="lbl-apt-type" style="font-size:0.8rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--teal);margin-bottom:0.75rem;">Appointment Type <span class="required">*</span></div>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+            <button class="apt-type-btn" id="btn-type-consult" onclick="selectAptType('consultation',this)">
+              <span class="apt-type-icon">💬</span>
+              <span id="lbl-consult">Consultation</span>
+            </button>
+            <button class="apt-type-btn" id="btn-type-new" onclick="selectAptType('new',this)">
+              <span class="apt-type-icon">🦷</span>
+              <span id="lbl-new-apt">New Appointment</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: patient + records (hidden until type chosen) -->
+        <div id="apt-patient-section" style="display:none;">
+          <div class="form-grid" style="margin-bottom:1.2rem;">
+            <div class="field full">
+              <label id="lbl-apt-patient">Patient <span class="required">*</span></label>
+              <select id="apt-patient" onchange="onPatientSelect()"><option value="" id="oap">Select registered patient</option></select>
+            </div>
+          </div>
+
+          <!-- Patient record card (hidden until patient chosen) -->
+          <div id="patient-record-card" style="display:none;background:var(--teal-pale);border:1.5px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:1.5rem;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;">
+              <strong id="pr-name" style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--dark);"></strong>
+              <span id="pr-type-badge" style="font-size:0.75rem;font-weight:600;padding:0.25rem 0.9rem;border-radius:50px;"></span>
+            </div>
+            <div id="pr-info-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem 2rem;font-size:0.88rem;margin-bottom:1rem;"></div>
+            <div id="pr-history-section" style="display:none;">
+              <div class="section-divider" style="margin:0.8rem 0;"><span id="lbl-prev-apts">Previous Appointments</span></div>
+              <div id="pr-prev-apts" style="font-size:0.85rem;"></div>
+            </div>
+          </div>
+
+          <div class="form-grid" style="margin-bottom:1.5rem;">
+            <div class="field full">
+              <label id="lbl-apt-notes">Notes for Doctor</label>
+              <textarea id="apt-notes" placeholder="Reason for visit, symptoms, special requests..." style="min-height:80px;"></textarea>
+            </div>
+          </div>
+
+          <div class="apt-layout">
+            <div>
+              <div class="calendar-header">
+                <button class="cal-nav" onclick="changeMonth(-1)">‹</button>
+                <span class="cal-month" id="cal-month-label"></span>
+                <button class="cal-nav" onclick="changeMonth(1)">›</button>
+              </div>
+              <div class="cal-grid" id="calendar"></div>
+            </div>
+            <div>
+              <label id="lbl-slots" style="display:block;margin-bottom:0.3rem;font-size:0.8rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--teal);">Available Time Slots</label>
+              <p id="time-hint" style="color:#7A9898;font-size:0.85rem;margin-bottom:0.5rem;">← Select a date first</p>
+              <div class="time-slots" id="time-slots"></div>
+            </div>
+          </div>
+
+          <div style="margin-top:1.5rem;">
+            <div id="apt-summary" style="background:var(--teal-pale);border:1.5px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin-bottom:1rem;display:none;font-size:0.88rem;color:var(--dark);line-height:1.9;"></div>
+            <button class="btn-primary" onclick="bookAppointment()" id="btn-book">✦ Confirm Appointment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="panel-dashboard" class="panel">
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num" id="stat-patients">0</div><div class="stat-label" id="stat-lbl-patients">Registered Patients</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-apts">0</div><div class="stat-label" id="stat-lbl-apts">Appointments Today</div></div>
+        <div class="stat-card"><div class="stat-num" id="stat-upcoming">0</div><div class="stat-label" id="stat-lbl-upcoming">Upcoming Total</div></div>
+      </div>
+      <div class="card" style="margin-bottom:2rem;">
+        <h2 class="card-title" id="dash-pt" style="margin-bottom:1.5rem;">Registered Patients</h2>
+        <div class="patients-table-wrap">
+          <table><thead><tr>
+            <th id="th1">#</th><th id="th2">Full Name</th><th id="th3">Age</th>
+            <th id="th4">Phone</th><th id="th6">Registered</th><th id="th13">Attendance</th>
+          </tr></thead><tbody id="patients-tbody">
+            <tr><td colspan="6"><div class="empty-state"><div class="icon">🦷</div><div id="empty-pt">No patients registered yet</div></div></td></tr>
+          </tbody></table>
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="card-title" id="dash-at" style="margin-bottom:1.5rem;">Appointments</h2>
+        <div class="patients-table-wrap">
+          <table><thead><tr>
+            <th>#</th><th id="th7">Patient</th><th id="th8">Date</th><th id="th9">Time</th>
+            <th id="th14">Type</th><th id="th11">Notes</th><th id="th12">Status</th>
+          </tr></thead><tbody id="apts-tbody">
+            <tr><td colspan="7"><div class="empty-state"><div class="icon">📅</div><div id="empty-at">No appointments booked yet</div></div></td></tr>
+          </tbody></table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">
+  <strong id="toast-title">Success!</strong>
+  <span id="toast-msg"></span>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+//  CREDENTIALS
+// ══════════════════════════════════════════════════════════
+const USERS = {
+  doctor:    { username: 'dr.samar',  password: 'Samar@2024', role: 'doctor' },
+  assistant: { username: 'assistant', password: 'Clinic@123', role: 'assistant' }
+};
+
+// ══════════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════════
+let patients = [], appointments = [], lang = 'en';
+let calDate = new Date(), selectedDate = null, selectedSlot = null;
+let currentRole = null, selectedLoginRole = 'doctor';
+let aptType = null; // 'consultation' | 'new'
+
+
+
+const TIMES = ['08:00 AM','08:30 AM','09:00 AM','09:30 AM','10:00 AM','10:30 AM',
+  '11:00 AM','11:30 AM','12:00 PM','01:00 PM','01:30 PM','02:00 PM',
+  '02:30 PM','03:00 PM','03:30 PM','04:00 PM','04:30 PM','05:00 PM'];
+
+// ══════════════════════════════════════════════════════════
+//  TRANSLATIONS
+// ══════════════════════════════════════════════════════════
+const T = {
+  en: {
+    llLogo:'Dr. <span style="color:var(--gold)">Samar Saad\'s</span> Dental Clinic',
+    llTagline:'Staff Portal', llTitle:'Welcome Back', llSub:'Sign in to your account to continue',
+    rtDoctor:'🩺 Doctor', rtAssistant:'🗂 Assistant',
+    llUserLbl:'Username', llPassLbl:'Password', llBtn:'Sign In',
+    loginError:'Incorrect username or password. Please try again.',
+    llLangBtn:'🌐 العربية', langBtn:'🌐 العربية',
+    logoMain:'Dr. <span style="color:var(--gold)">Samar Saad\'s</span> Dental Clinic',
+    logoSub:'Patient Management System',
+    navRegister:'Register', navAppointment:'Appointment', navDashboard:'Dashboard',
+    tabRegister:'Register', tabAppointment:'Appointment', tabDashboard:'Dashboard',
+    logoutBtn:'Logout', roleBadgeDoctor:'Doctor', roleBadgeAssistant:'Assistant',
+    heroTag:'✦ Patient Portal',
+    heroH1:'Your Smile,<br><em>Our Priority</em>',
+    heroP:'Manage patient records and appointments for Dr. Samar Saad\'s clinic with ease.',
+    regTitle:'Patient Registration',
+    regSubtitle:'Please fill in the patient\'s information. Fields marked <span class="required">*</span> are required.',
+    lblFname:'First Name <span class="required">*</span>', phFname:'Samar',
+    lblLname:'Last Name <span class="required">*</span>', phLname:'Hassan',
+    lblDob:'Age <span class="required">*</span>',
+    lblGender:'Gender <span class="required">*</span>',
+    og0:'Select gender', og1:'Male', og2:'Female', og3:'Other', og4:'Prefer not to say',
+    lblPhone:'Phone Number <span class="required">*</span>', phPhone:'01012345678',
+    lblEmail:'Email Address', lblAddress:'Home Address', phAddress:'Street, City, Governorate',
+    lblNatid:'National ID',
+    secMedical:'Medical History',
+    lblAllergies:'Known Allergies', phAllergies:'e.g., Penicillin, Latex, None',
+    lblMeds:'Current Medications', phMeds:'List any medications currently taken',
+    lblConditions:'Medical Conditions / Notes', phConditions:'Diabetes, hypertension, heart conditions...',
+    btnRegister:'✦ Register Patient',
+    aptTitle:'Book Appointment', aptSubtitle:'Choose appointment type, then select a patient.',
+    lblAptType:'Appointment Type', lblConsult:'Consultation', lblNewApt:'New Appointment',
+    lblAptPatient:'Patient <span class="required">*</span>', oap:'Select registered patient',
+    lblAptNotes:'Notes for Doctor', phAptNotes:'Reason for visit, symptoms, special requests...',
+    lblSlots:'Available Time Slots', timeHint:'← Select a date first',
+    btnBook:'✦ Confirm Appointment',
+    sumTitle:'Appointment Summary', sumPt:'Patient', sumType:'Type', sumDate:'Date', sumTime:'Time',
+    lblPrevApts:'Previous Appointments', noPrevApts:'No previous appointments.',
+    prAge:'Age', prPhone:'Phone', prGender:'Gender', prAllergies:'Allergies', prMeds:'Medications', prConditions:'Conditions',
+    typeConsultBadge:'Consultation', typeNewBadge:'New Appointment',
+    statPt:'Registered Patients', statAt:'Appointments Today', statUp:'Upcoming Total',
+    dashPt:'Registered Patients', dashAt:'Appointments',
+    th1:'#', th2:'Full Name', th3:'Age', th4:'Phone', th6:'Registered', th13:'Attendance',
+    th7:'Patient', th8:'Date', th9:'Time', th14:'Type', th11:'Notes', th12:'Status',
+    attendedLbl:'✓ Attended', notAttendedLbl:'✗ Not Attended',
+    emptyPt:'No patients registered yet', emptyAt:'No appointments booked yet',
+    toastMissTitle:'⚠️ Missing Info', toastMissMsg:'Please fill in all required fields.',
+    toastPhoneTitle:'⚠️ Invalid Phone', toastPhoneMsg:'Phone number must be exactly 11 digits.',
+    toastRegTitle:'✓ Patient Registered',
+    toastIncTitle:'⚠️ Incomplete', toastIncMsg:'Please select appointment type, patient, date and time.',
+    toastBookTitle:'✓ Appointment Booked',
+    confirmed:'Confirmed',
+    months:['January','February','March','April','May','June','July','August','September','October','November','December'],
+    days:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+  },
+  ar: {
+    llLogo:'عيادة <span style="color:var(--gold)">د. سمر سعد</span> لطب الأسنان',
+    llTagline:'بوابة الموظفين', llTitle:'أهلاً بعودتك', llSub:'سجّل دخولك للمتابعة',
+    rtDoctor:'🩺 الطبيبة', rtAssistant:'🗂 المساعد',
+    llUserLbl:'اسم المستخدم', llPassLbl:'كلمة المرور', llBtn:'تسجيل الدخول',
+    loginError:'اسم المستخدم أو كلمة المرور غير صحيحة. حاول مرة أخرى.',
+    llLangBtn:'🌐 English', langBtn:'🌐 English',
+    logoMain:'عيادة <span style="color:var(--gold)">د. سمر سعد</span> لطب الأسنان',
+    logoSub:'نظام إدارة المرضى',
+    navRegister:'تسجيل مريض', navAppointment:'حجز موعد', navDashboard:'لوحة التحكم',
+    tabRegister:'تسجيل', tabAppointment:'موعد', tabDashboard:'لوحة',
+    logoutBtn:'خروج', roleBadgeDoctor:'الطبيبة', roleBadgeAssistant:'المساعد',
+    heroTag:'✦ بوابة المريض',
+    heroH1:'ابتسامتك،<br><em>أولويتنا</em>',
+    heroP:'إدارة سجلات المرضى والمواعيد في عيادة د. سمر سعد بكل سهولة.',
+    regTitle:'تسجيل مريض جديد',
+    regSubtitle:'يرجى تعبئة بيانات المريض. الحقول المميزة بـ <span class="required">*</span> إلزامية.',
+    lblFname:'الاسم الأول <span class="required">*</span>', phFname:'سمر',
+    lblLname:'اسم العائلة <span class="required">*</span>', phLname:'حسن',
+    lblDob:'العمر <span class="required">*</span>',
+    lblGender:'الجنس <span class="required">*</span>',
+    og0:'اختر الجنس', og1:'ذكر', og2:'أنثى', og3:'آخر', og4:'أفضل عدم الإفصاح',
+    lblPhone:'رقم الهاتف <span class="required">*</span>', phPhone:'01012345678',
+    lblEmail:'البريد الإلكتروني', lblAddress:'العنوان', phAddress:'الشارع، المدينة، المحافظة',
+    lblNatid:'الرقم القومي',
+    secMedical:'التاريخ الطبي',
+    lblAllergies:'الحساسية المعروفة', phAllergies:'مثال: بنسلين، لاتكس، لا يوجد',
+    lblMeds:'الأدوية الحالية', phMeds:'اذكر أي أدوية تُؤخذ حالياً',
+    lblConditions:'الحالات الطبية / ملاحظات', phConditions:'السكري، ارتفاع ضغط الدم، أمراض القلب...',
+    btnRegister:'✦ تسجيل المريض',
+    aptTitle:'حجز موعد', aptSubtitle:'اختر نوع الموعد، ثم حدد المريض.',
+    lblAptType:'نوع الموعد', lblConsult:'استشارة', lblNewApt:'موعد جديد',
+    lblAptPatient:'المريض <span class="required">*</span>', oap:'اختر مريضاً مسجلاً',
+    lblAptNotes:'ملاحظات للطبيبة', phAptNotes:'سبب الزيارة، الأعراض، طلبات خاصة...',
+    lblSlots:'الأوقات المتاحة', timeHint:'اختر تاريخاً أولاً ←',
+    btnBook:'✦ تأكيد الموعد',
+    sumTitle:'ملخص الموعد', sumPt:'المريض', sumType:'النوع', sumDate:'التاريخ', sumTime:'الوقت',
+    lblPrevApts:'المواعيد السابقة', noPrevApts:'لا توجد مواعيد سابقة.',
+    prAge:'العمر', prPhone:'الهاتف', prGender:'الجنس', prAllergies:'الحساسية', prMeds:'الأدوية', prConditions:'الحالات الطبية',
+    typeConsultBadge:'استشارة', typeNewBadge:'موعد جديد',
+    statPt:'مرضى مسجلون', statAt:'مواعيد اليوم', statUp:'إجمالي القادمة',
+    dashPt:'المرضى المسجلون', dashAt:'المواعيد',
+    th1:'#', th2:'الاسم الكامل', th3:'العمر', th4:'الهاتف', th6:'تاريخ التسجيل', th13:'الحضور',
+    th7:'المريض', th8:'التاريخ', th9:'الوقت', th14:'النوع', th11:'ملاحظات', th12:'الحالة',
+    attendedLbl:'✓ حضر', notAttendedLbl:'✗ لم يحضر',
+    emptyPt:'لا يوجد مرضى مسجلون بعد', emptyAt:'لا توجد مواعيد محجوزة بعد',
+    toastMissTitle:'⚠️ بيانات ناقصة', toastMissMsg:'يرجى تعبئة جميع الحقول الإلزامية.',
+    toastPhoneTitle:'⚠️ رقم هاتف غير صحيح', toastPhoneMsg:'يجب أن يكون رقم الهاتف 11 رقماً بالضبط.',
+    toastRegTitle:'✓ تم تسجيل المريض',
+    toastIncTitle:'⚠️ غير مكتمل', toastIncMsg:'يرجى اختيار نوع الموعد والمريض والتاريخ والوقت.',
+    toastBookTitle:'✓ تم حجز الموعد',
+    confirmed:'مؤكد',
+    months:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],
+    days:['أحد','اثن','ثلا','أرب','خمس','جمع','سبت'],
+  }
+};
+
+// ══════════════════════════════════════════════════════════
+//  EXPORT / IMPORT JSON
+// ══════════════════════════════════════════════════════════
+function exportJSON() {
+  const payload = {
+    exportedAt: new Date().toISOString(),
+    patients,
+    appointments: appointments.map(a => ({...a, rawDate: a.rawDate ? a.rawDate.toISOString() : null}))
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const dateStr = new Date().toISOString().slice(0,10);
+  a.href = url;
+  a.download = `clinic-data-${dateStr}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast(lang==='ar'?'✓ تم التصدير':'✓ Exported', lang==='ar'?'تم تنزيل ملف البيانات':'Data file downloaded successfully.');
+}
+
+function importJSON(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (!data.patients || !data.appointments) throw new Error('Invalid format');
+      patients = data.patients;
+      appointments = data.appointments.map(a => ({...a, rawDate: a.rawDate ? new Date(a.rawDate) : new Date()}));
+      updatePatientDropdown();
+      if (document.getElementById('panel-dashboard').classList.contains('active')) refreshDashboard();
+      showToast(
+        lang==='ar'?'✓ تم الاستيراد':'✓ Imported',
+        lang==='ar'
+          ? `تم تحميل ${patients.length} مريض و${appointments.length} موعد`
+          : `Loaded ${patients.length} patients & ${appointments.length} appointments`
+      );
+    } catch(err) {
+      showToast(lang==='ar'?'⚠️ خطأ':'⚠️ Error', lang==='ar'?'ملف JSON غير صالح':'Invalid JSON file. Please use an exported file.');
+    }
+    event.target.value = '';
+  };
+  reader.readAsText(file);
+}
+
+// ══════════════════════════════════════════════════════════
+//  LOGIN
+// ══════════════════════════════════════════════════════════
+function selectRole(role, btn) {
+  selectedLoginRole = role;
+  document.querySelectorAll('.role-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('login-user').value = '';
+  document.getElementById('login-pass').value = '';
+  document.getElementById('login-error').style.display = 'none';
+}
+
+function doLogin() {
+  const t = T[lang];
+  const username = document.getElementById('login-user').value.trim();
+  const password = document.getElementById('login-pass').value;
+  const cred = USERS[selectedLoginRole];
+  const errEl = document.getElementById('login-error');
+
+  if (username === cred.username && password === cred.password) {
+    currentRole = selectedLoginRole;
+    errEl.style.display = 'none';
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    applyRolePermissions();
+    applyLang();
+    buildCalendar();
+  } else {
+    errEl.textContent = t.loginError;
+    errEl.style.display = 'block';
+    document.getElementById('login-pass').value = '';
+  }
+}
+
+document.getElementById('login-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+document.getElementById('login-user').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+
+function doLogout() {
+  currentRole = null;
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('login-user').value = '';
+  document.getElementById('login-pass').value = '';
+  document.getElementById('login-error').style.display = 'none';
+  showPanel('register', document.querySelector('.tab-btn'));
+  document.querySelectorAll('.tab-btn').forEach((b,i) => b.classList.toggle('active', i===0));
+  document.querySelectorAll('nav button[data-key]').forEach(b => b.classList.toggle('active', b.dataset.key==='navRegister'));
+}
+
+function applyRolePermissions() {
+  const t = T[lang];
+  const isAssistant = currentRole === 'assistant';
+  document.getElementById('tab-dashboard').style.display = isAssistant ? 'none' : '';
+  document.getElementById('nav-dashboard').style.display = isAssistant ? 'none' : '';
+  document.getElementById('role-badge-display').textContent = isAssistant ? t.roleBadgeAssistant : t.roleBadgeDoctor;
+}
+
+// ══════════════════════════════════════════════════════════
+//  LANGUAGE
+// ══════════════════════════════════════════════════════════
+function toggleLang() { lang = lang === 'en' ? 'ar' : 'en'; applyLang(); }
+
+function applyLang() {
+  const t = T[lang];
+  const body = document.getElementById('body');
+  const html = document.documentElement;
+  if (lang === 'ar') { body.classList.add('ar'); html.setAttribute('dir','rtl'); html.setAttribute('lang','ar'); }
+  else { body.classList.remove('ar'); html.setAttribute('dir','ltr'); html.setAttribute('lang','en'); }
+
+  const setText = (id,v) => { const el=document.getElementById(id); if(el) el.innerHTML=v; };
+  const setTxt  = (id,v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
+  const setPh   = (id,v) => { const el=document.getElementById(id); if(el) el.placeholder=v; };
+
+  setText('ll-logo',t.llLogo); setTxt('ll-tagline',t.llTagline); setTxt('ll-title',t.llTitle); setTxt('ll-sub',t.llSub);
+  setTxt('rt-doctor',t.rtDoctor); setTxt('rt-assistant',t.rtAssistant);
+  setTxt('ll-user-lbl',t.llUserLbl); setTxt('ll-pass-lbl',t.llPassLbl); setTxt('ll-btn',t.llBtn);
+  document.getElementById('login-user').placeholder = t.llUserLbl;
+  setTxt('login-lang-btn',t.llLangBtn);
+  const errEl=document.getElementById('login-error');
+  if(errEl.style.display!=='none') errEl.textContent=t.loginError;
+
+  const logoEl=document.getElementById('logo-text');
+  if(logoEl) logoEl.innerHTML=t.logoMain+`<small id="logo-sub">${t.logoSub}</small>`;
+  setTxt('lang-btn',t.langBtn); setTxt('logout-btn',t.logoutBtn);
+  const expBtn=document.getElementById('btn-export'); if(expBtn) expBtn.textContent=(lang==='ar'?'⬇ تصدير':'⬇ Export');
+  const impLbl=document.getElementById('lbl-import'); if(impLbl) impLbl.childNodes[0].textContent=(lang==='ar'?'⬆ استيراد':'⬆ Import');
+  document.querySelectorAll('nav button[data-key]').forEach(btn=>{const k=btn.dataset.key;if(t[k])btn.textContent=t[k];});
+  document.querySelectorAll('.tab-btn[data-key]').forEach(btn=>{const k=btn.dataset.key;if(t[k])btn.textContent=t[k];});
+  setTxt('hero-tag',t.heroTag); setText('hero-h1',t.heroH1); setTxt('hero-p',t.heroP);
+
+  setTxt('reg-title',t.regTitle); setText('reg-subtitle',t.regSubtitle);
+  setText('lbl-fname',t.lblFname); setPh('fname',t.phFname);
+  setText('lbl-lname',t.lblLname); setPh('lname',t.phLname);
+  setText('lbl-dob',t.lblDob);
+  setText('lbl-gender',t.lblGender);
+  ['og0','og1','og2','og3','og4'].forEach(k=>setTxt(k,t[k]));
+  setText('lbl-phone',t.lblPhone); setPh('phone',t.phPhone);
+  setTxt('lbl-email',t.lblEmail); setTxt('lbl-address',t.lblAddress); setPh('address',t.phAddress);
+  setTxt('lbl-natid',t.lblNatid);
+  setTxt('sec-medical',t.secMedical);
+  setTxt('lbl-allergies',t.lblAllergies); setPh('allergies',t.phAllergies);
+  setTxt('lbl-meds',t.lblMeds); setPh('meds',t.phMeds);
+  setTxt('lbl-conditions',t.lblConditions); setPh('conditions',t.phConditions);
+  setText('btn-register',t.btnRegister);
+
+  setTxt('apt-title',t.aptTitle); setTxt('apt-subtitle',t.aptSubtitle);
+  const aptTypeLbl=document.getElementById('lbl-apt-type'); if(aptTypeLbl) aptTypeLbl.innerHTML=t.lblAptType+' <span class="required">*</span>';
+  setTxt('lbl-consult',t.lblConsult); setTxt('lbl-new-apt',t.lblNewApt);
+  setText('lbl-apt-patient',t.lblAptPatient); setTxt('oap',t.oap);
+  setTxt('lbl-apt-notes',t.lblAptNotes); setPh('apt-notes',t.phAptNotes);
+  setTxt('lbl-prev-apts',t.lblPrevApts);
+  const slotLbl=document.getElementById('lbl-slots');
+  if(slotLbl){slotLbl.textContent=t.lblSlots;slotLbl.style.textTransform=lang==='ar'?'none':'uppercase';slotLbl.style.letterSpacing=lang==='ar'?'0':'0.06em';}
+  setTxt('time-hint',t.timeHint); setText('btn-book',t.btnBook);
+
+  setTxt('stat-lbl-patients',t.statPt); setTxt('stat-lbl-apts',t.statAt); setTxt('stat-lbl-upcoming',t.statUp);
+  setTxt('dash-pt',t.dashPt); setTxt('dash-at',t.dashAt);
+  ['th1','th2','th3','th4','th6','th7','th8','th9','th14','th11','th12','th13'].forEach(k=>setTxt(k,t[k]));
+
+  if(currentRole) applyRolePermissions();
+  updatePatientDropdown(); buildCalendar(); updateSummary();
+  if(document.getElementById('panel-dashboard').classList.contains('active')) refreshDashboard();
+}
+
+// ══════════════════════════════════════════════════════════
+//  PANELS
+// ══════════════════════════════════════════════════════════
+function showPanel(id,btn){
+  if(id==='dashboard'&&currentRole==='assistant') return;
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(id==='appointment') buildCalendar();
+  if(id==='dashboard') refreshDashboard();
+}
+function showTab(id,btn){
+  if(id==='dashboard'&&currentRole==='assistant') return;
+  showPanel(id,null);
+  document.querySelectorAll('nav button[data-key]').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const map={register:0,appointment:1,dashboard:2};
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===map[id]));
+}
+
+// ══════════════════════════════════════════════════════════
+//  TOAST
+// ══════════════════════════════════════════════════════════
+function showToast(title,msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toast-title').textContent=title;
+  document.getElementById('toast-msg').textContent=msg;
+  t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+// ══════════════════════════════════════════════════════════
+//  REGISTER
+// ══════════════════════════════════════════════════════════
+function registerPatient(){
+  const t=T[lang];
+  const fname=document.getElementById('fname').value.trim();
+  const lname=document.getElementById('lname').value.trim();
+  const dob=document.getElementById('dob').value;
+  const gender=document.getElementById('gender').value;
+  const phone=document.getElementById('phone').value.trim();
+  if(!fname||!lname||!dob||!gender||!phone){showToast(t.toastMissTitle,t.toastMissMsg);return;}
+  if(phone.replace(/\D/g,'').length!==11){showToast(t.toastPhoneTitle,t.toastPhoneMsg);return;}
+
+  const newId = patients.length > 0 ? Math.max(...patients.map(p=>p.id))+1 : 1;
+  patients.push({
+    id:newId, fname, lname, dob, gender, phone,
+    email:document.getElementById('email').value.trim(),
+    address:document.getElementById('address').value.trim(),
+    natid:document.getElementById('natid').value.trim(),
+    allergies:document.getElementById('allergies').value.trim(),
+    meds:document.getElementById('meds').value.trim(),
+    conditions:document.getElementById('conditions').value.trim(),
+    attended:false,
+    registered:new Date().toLocaleDateString(lang==='ar'?'ar-EG':'en-GB')
+  });
+
+  updatePatientDropdown();
+  ['fname','lname','dob','phone','email','address','natid','allergies','meds','conditions'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('gender').selectedIndex=0;
+  showToast(t.toastRegTitle,`${fname} ${lname}`);
+}
+
+function updatePatientDropdown(){
+  const t=T[lang];
+  const sel=document.getElementById('apt-patient');
+  sel.innerHTML=`<option value="">${t.oap}</option>`;
+  patients.forEach(p=>{
+    const opt=document.createElement('option');
+    opt.value=p.id;
+    opt.textContent=`${p.fname} ${p.lname} — ${p.phone}`;
+    sel.appendChild(opt);
+  });
+}
+
+// ══════════════════════════════════════════════════════════
+//  CALENDAR
+// ══════════════════════════════════════════════════════════
+function buildCalendar(){
+  const t=T[lang];
+  const lbl=document.getElementById('cal-month-label');
+  if(!lbl) return;
+  lbl.textContent=`${t.months[calDate.getMonth()]} ${calDate.getFullYear()}`;
+  const cal=document.getElementById('calendar');
+  cal.innerHTML='';
+  t.days.forEach(d=>{const div=document.createElement('div');div.className='cal-day-name';div.textContent=d;cal.appendChild(div);});
+  const firstDay=new Date(calDate.getFullYear(),calDate.getMonth(),1).getDay();
+  const daysInMonth=new Date(calDate.getFullYear(),calDate.getMonth()+1,0).getDate();
+  const today=new Date();
+  for(let i=0;i<firstDay;i++){const div=document.createElement('div');div.className='cal-day empty';cal.appendChild(div);}
+  for(let d=1;d<=daysInMonth;d++){
+    const div=document.createElement('div');div.className='cal-day';div.textContent=d;
+    const thisDate=new Date(calDate.getFullYear(),calDate.getMonth(),d);
+    const isPast=thisDate<new Date(today.getFullYear(),today.getMonth(),today.getDate());
+    const isSun=thisDate.getDay()===0;
+    const isToday=d===today.getDate()&&calDate.getMonth()===today.getMonth()&&calDate.getFullYear()===today.getFullYear();
+    const isSel=selectedDate&&d===selectedDate.getDate()&&calDate.getMonth()===selectedDate.getMonth()&&calDate.getFullYear()===selectedDate.getFullYear();
+    if(isPast||isSun){div.classList.add('past');}
+    else{if(isToday)div.classList.add('today');if(isSel)div.classList.add('selected');div.onclick=()=>selectDate(thisDate,div);}
+    cal.appendChild(div);
+  }
+}
+function selectDate(date,el){
+  document.querySelectorAll('.cal-day').forEach(d=>d.classList.remove('selected'));
+  el.classList.add('selected');selectedDate=date;selectedSlot=null;
+  buildTimeSlots();updateSummary();
+}
+function buildTimeSlots(){
+  const container=document.getElementById('time-slots');
+  document.getElementById('time-hint').style.display='none';
+  container.innerHTML='';
+  const taken=[2,5,9,13];
+  TIMES.forEach((t,i)=>{
+    const div=document.createElement('div');
+    div.className='slot'+(taken.includes(i)?' taken':'');
+    div.textContent=t;
+    if(!taken.includes(i)){
+      div.onclick=()=>{
+        document.querySelectorAll('.slot').forEach(s=>s.classList.remove('selected-slot'));
+        div.classList.add('selected-slot');selectedSlot=t;updateSummary();
+      };
+    }
+    container.appendChild(div);
+  });
+}
+function updateSummary(){
+  const t=T[lang];
+  const summary=document.getElementById('apt-summary');
+  const patient=document.getElementById('apt-patient').value;
+  if(selectedDate&&selectedSlot&&patient&&aptType){
+    const patObj=patients.find(p=>p.id==patient);
+    const locale=lang==='ar'?'ar-EG':'en-GB';
+    const typeLabel=aptType==='consultation'?t.typeConsultBadge:t.typeNewBadge;
+    summary.style.display='block';
+    summary.innerHTML=`
+      <strong style="color:var(--teal);font-family:${lang==='ar'?'Tajawal':'Playfair Display'},serif;font-size:1rem;">${t.sumTitle}</strong><br>
+      📋 <b>${t.sumType}:</b> ${typeLabel}<br>
+      👤 <b>${t.sumPt}:</b> ${patObj?patObj.fname+' '+patObj.lname:patient}<br>
+      📅 <b>${t.sumDate}:</b> ${selectedDate.toLocaleDateString(locale,{weekday:'long',day:'numeric',month:'long',year:'numeric'})}<br>
+      🕐 <b>${t.sumTime}:</b> ${selectedSlot}`;
+  } else { summary.style.display='none'; }
+}
+function changeMonth(dir){calDate.setMonth(calDate.getMonth()+dir);buildCalendar();}
+
+// ══════════════════════════════════════════════════════════
+//  APPOINTMENT TYPE + PATIENT RECORD
+// ══════════════════════════════════════════════════════════
+function selectAptType(type, btn) {
+  aptType = type;
+  document.querySelectorAll('.apt-type-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  document.getElementById('apt-patient-section').style.display = 'block';
+  document.getElementById('patient-record-card').style.display = 'none';
+  document.getElementById('apt-patient').selectedIndex = 0;
+  selectedDate = null; selectedSlot = null;
+  document.getElementById('time-slots').innerHTML = '';
+  document.getElementById('time-hint').style.display = 'block';
+  document.getElementById('apt-summary').style.display = 'none';
+  buildCalendar();
+}
+
+function onPatientSelect() {
+  updateSummary();
+  const patId = parseInt(document.getElementById('apt-patient').value);
+  const t = T[lang];
+  const card = document.getElementById('patient-record-card');
+  if (!patId) { card.style.display = 'none'; return; }
+  const p = patients.find(pt => pt.id === patId);
+  if (!p) { card.style.display = 'none'; return; }
+
+  // Name + type badge
+  document.getElementById('pr-name').textContent = `${p.fname} ${p.lname}`;
+  const badge = document.getElementById('pr-type-badge');
+  if (aptType === 'consultation') {
+    badge.textContent = t.typeConsultBadge;
+    badge.style.cssText = 'font-size:0.75rem;font-weight:600;padding:0.25rem 0.9rem;border-radius:50px;background:#EEF4FF;color:#3B6DD4;';
+  } else {
+    badge.textContent = t.typeNewBadge;
+    badge.style.cssText = 'font-size:0.75rem;font-weight:600;padding:0.25rem 0.9rem;border-radius:50px;background:#E8F5EE;color:#2A7A5A;';
+  }
+
+  // Info grid
+  const infoGrid = document.getElementById('pr-info-grid');
+  const fields = [
+    [t.prAge, p.dob],
+    [t.prPhone, p.phone],
+    [t.prGender, p.gender],
+    [t.prAllergies, p.allergies || '—'],
+    [t.prMeds, p.meds || '—'],
+    [t.prConditions, p.conditions || '—'],
+  ];
+  infoGrid.innerHTML = fields.map(([lbl, val]) =>
+    `<div class="pr-info-item"><span class="pr-info-label">${lbl}</span><span class="pr-info-value">${val || '—'}</span></div>`
+  ).join('');
+
+  // Previous appointments
+  const prevApts = appointments.filter(a => a.patientId === patId);
+  const histSection = document.getElementById('pr-history-section');
+  const prevDiv = document.getElementById('pr-prev-apts');
+  if (prevApts.length > 0) {
+    histSection.style.display = 'block';
+    prevDiv.innerHTML = prevApts.map(a =>
+      `<div class="pr-prev-row">
+        <span style="font-weight:600;color:var(--dark);">${a.date}</span>
+        <span style="color:#7A9898;">${a.time}</span>
+        <span class="badge ${a.aptType==='consultation'?'badge-consult':'badge-confirmed'}" style="font-size:0.72rem;">${a.typeLabel||a.status}</span>
+        <span style="color:var(--text);flex:1;">${a.notes||''}</span>
+      </div>`
+    ).join('');
+  } else {
+    histSection.style.display = 'block';
+    prevDiv.innerHTML = `<span style="color:#7A9898;font-size:0.85rem;">${t.noPrevApts}</span>`;
+  }
+
+  card.style.display = 'block';
+}
+
+// ══════════════════════════════════════════════════════════
+//  BOOK APPOINTMENT
+// ══════════════════════════════════════════════════════════
+function bookAppointment(){
+  const t=T[lang];
+  const patId=document.getElementById('apt-patient').value;
+  if(!aptType||!patId||!selectedDate||!selectedSlot){showToast(t.toastIncTitle,t.toastIncMsg);return;}
+  const patObj=patients.find(p=>p.id==patId);
+  const locale=lang==='ar'?'ar-EG':'en-GB';
+  const newId = appointments.length > 0 ? Math.max(...appointments.map(a=>a.id))+1 : 1;
+  const typeLabel=aptType==='consultation'?t.typeConsultBadge:t.typeNewBadge;
+  appointments.push({
+    id:newId,
+    patientId:parseInt(patId),
+    patientName:patObj?`${patObj.fname} ${patObj.lname}`:'',
+    aptType, typeLabel,
+    date:selectedDate.toLocaleDateString(locale),
+    time:selectedSlot,
+    notes:document.getElementById('apt-notes').value,
+    status:t.confirmed,
+    rawDate:new Date(selectedDate)
+  });
+  showToast(t.toastBookTitle,`${patObj?patObj.fname:''} — ${selectedSlot}`);
+  document.getElementById('apt-patient').selectedIndex=0;
+  document.getElementById('apt-notes').value='';
+  selectedDate=null;selectedSlot=null;aptType=null;
+  document.getElementById('apt-summary').style.display='none';
+  document.getElementById('time-slots').innerHTML='';
+  document.getElementById('time-hint').style.display='block';
+  document.getElementById('patient-record-card').style.display='none';
+  document.getElementById('apt-patient-section').style.display='none';
+  document.querySelectorAll('.apt-type-btn').forEach(b=>b.classList.remove('selected'));
+  buildCalendar();
+}
+
+// ══════════════════════════════════════════════════════════
+//  DASHBOARD
+// ══════════════════════════════════════════════════════════
+function refreshDashboard(){
+  const t=T[lang];
+  const locale=lang==='ar'?'ar-EG':'en-GB';
+  document.getElementById('stat-patients').textContent=patients.length;
+  const todayStr=new Date().toLocaleDateString(locale);
+  const today=new Date();
+  document.getElementById('stat-apts').textContent=appointments.filter(a=>a.date===todayStr).length;
+  document.getElementById('stat-upcoming').textContent=appointments.filter(a=>a.rawDate>=new Date(today.getFullYear(),today.getMonth(),today.getDate())).length;
+
+  const ptbody=document.getElementById('patients-tbody');
+  if(patients.length===0){
+    ptbody.innerHTML=`<tr><td colspan="6"><div class="empty-state"><div class="icon">🦷</div><div>${t.emptyPt}</div></div></td></tr>`;
+  } else {
+    ptbody.innerHTML=patients.map(p=>{
+      const cls=p.attended?'attend-btn attended':'attend-btn not-attended';
+      const lbl=p.attended?t.attendedLbl:t.notAttendedLbl;
+      return `<tr><td>${p.id}</td><td><strong>${p.fname} ${p.lname}</strong></td><td>${p.dob}</td><td>${p.phone}</td><td>${p.registered}</td><td><button class="${cls}" onclick="toggleAttendance(${p.id})">${lbl}</button></td></tr>`;
+    }).join('');
+  }
+
+  const atbody=document.getElementById('apts-tbody');
+  atbody.innerHTML=appointments.length===0
+    ?`<tr><td colspan="7"><div class="empty-state"><div class="icon">📅</div><div>${t.emptyAt}</div></div></td></tr>`
+    :appointments.map(a=>`<tr><td>${a.id}</td><td>${a.patientName}</td><td>${a.date}</td><td>${a.time}</td><td><span class="badge ${a.aptType==='consultation'?'badge-consult':'badge-confirmed'}">${a.typeLabel||a.status}</span></td><td>${a.notes||'—'}</td><td><span class="badge badge-confirmed">${a.status}</span></td></tr>`).join('');
+}
+
+function toggleAttendance(patientId){
+  const p=patients.find(p=>p.id===patientId);
+  if(!p) return;
+  p.attended=!p.attended;
+  refreshDashboard();
+}
+
+document.getElementById('apt-patient').addEventListener('change',updateSummary);
+
+applyLang();
+</script>
+</body>
+</html>
