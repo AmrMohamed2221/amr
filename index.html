@@ -11,42 +11,6 @@
 body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;}
 body.ar{font-family:'Tajawal',sans-serif;direction:rtl;}
 
-/* ── SYNC DOT ── */
-.sdot{width:8px;height:8px;border-radius:50%;background:#3A5858;flex-shrink:0;transition:background 0.3s;}
-.sdot.on{background:#5A9A7A;}
-.sdot.busy{background:var(--gold);animation:sdp .9s ease-in-out infinite;}
-.sdot.err{background:var(--error);}
-@keyframes sdp{0%,100%{opacity:1;}50%{opacity:.2;}}
-.spinn{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spinnr .7s linear infinite;vertical-align:middle;margin-right:4px;}
-@keyframes spinnr{to{transform:rotate(360deg);}}
-
-/* ── GITHUB MODAL ── */
-.gh-ov{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;display:none;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px);}
-.gh-ov.open{display:flex;}
-.gh-box{background:var(--dark);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:2.2rem 2.5rem;width:100%;max-width:460px;box-shadow:0 24px 64px rgba(0,0,0,.6);}
-.gh-box h2{font-family:'Playfair Display',serif;color:var(--cream);font-size:1.4rem;margin-bottom:.3rem;}
-.ar .gh-box h2{font-family:'Tajawal',sans-serif;font-weight:700;}
-.gh-box p{color:#7A9898;font-size:.82rem;margin-bottom:1.5rem;line-height:1.6;}
-.gh-f{display:flex;flex-direction:column;gap:.35rem;margin-bottom:.9rem;}
-.gh-f label{font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#7A9898;}
-.ar .gh-f label{letter-spacing:0;text-transform:none;font-family:'Tajawal',sans-serif;font-size:.82rem;}
-.gh-f input{padding:.72rem .9rem;border:1.5px solid rgba(255,255,255,.1);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;color:var(--cream);background:rgba(255,255,255,.07);outline:none;width:100%;}
-.gh-f input:focus{border-color:var(--teal-light);box-shadow:0 0 0 3px rgba(26,107,107,.2);}
-.gh-f input::placeholder{color:rgba(255,255,255,.2);}
-.gh-help{font-size:.71rem;color:#4A6868;margin-top:.2rem;line-height:1.5;}
-.gh-help a{color:var(--gold);text-decoration:none;}
-.gh-help a:hover{text-decoration:underline;}
-.gh-err{background:rgba(181,69,60,.15);border:1px solid rgba(181,69,60,.3);border-radius:8px;padding:.55rem .85rem;color:#F09090;font-size:.8rem;margin-bottom:.8rem;display:none;}
-.gh-footer{display:flex;gap:.7rem;margin-top:1.3rem;flex-wrap:wrap;}
-.btn-ghok{flex:1;padding:.8rem;background:var(--teal);color:#fff;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:500;cursor:pointer;transition:all .2s;}
-.btn-ghok:hover{background:var(--teal-light);}
-.btn-ghok:disabled{opacity:.5;cursor:not-allowed;}
-.btn-ghx{padding:.8rem 1.2rem;background:rgba(255,255,255,.06);color:#7A9898;border:1px solid rgba(255,255,255,.1);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;cursor:pointer;transition:all .2s;}
-.btn-ghx:hover{background:rgba(255,255,255,.12);color:var(--cream);}
-.btn-ghd{padding:.8rem 1.2rem;background:rgba(181,69,60,.12);color:#F09090;border:1px solid rgba(181,69,60,.25);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.9rem;cursor:pointer;transition:all .2s;}
-.btn-ghd:hover{background:rgba(181,69,60,.22);}
-.gh-stat{display:flex;align-items:center;gap:.5rem;margin-top:.9rem;font-size:.75rem;color:#5A7878;}
-
 /* ── LOGIN ── */
 #login-screen{min-height:100vh;background:var(--dark);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
 #login-screen::before{content:'';position:absolute;top:-150px;right:-150px;width:600px;height:600px;background:radial-gradient(circle,rgba(26,107,107,.35) 0%,transparent 70%);pointer-events:none;}
@@ -79,8 +43,6 @@ body.ar{font-family:'Tajawal',sans-serif;direction:rtl;}
 .lbtn:hover{background:var(--teal-light);transform:translateY(-1px);}
 .llang{display:block;margin:1.5rem auto 0;background:none;border:1px solid rgba(201,169,110,.3);color:var(--gold);font-family:'Tajawal',sans-serif;font-size:.85rem;padding:.4rem 1.2rem;border-radius:50px;cursor:pointer;transition:all .2s;}
 .llang:hover{background:rgba(201,169,110,.1);}
-.lsync{display:flex;align-items:center;gap:.5rem;justify-content:center;margin-top:.9rem;font-size:.75rem;color:#5A7878;}
-.lsync .sdot{width:7px;height:7px;}
 
 /* ── APP ── */
 #app{display:none;}
@@ -97,10 +59,6 @@ nav button:hover{color:var(--cream);background:rgba(255,255,255,.08);}
 nav button.active{color:var(--gold);background:rgba(201,169,110,.12);}
 .rbadge{background:rgba(201,169,110,.12);border:1px solid rgba(201,169,110,.25);color:var(--gold);font-size:.72rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .8rem;border-radius:50px;font-family:'DM Sans',sans-serif;white-space:nowrap;}
 .ar .rbadge{font-family:'Tajawal',sans-serif;letter-spacing:0;text-transform:none;font-size:.82rem;}
-.hdrsync{display:flex;align-items:center;gap:.4rem;font-size:.71rem;color:#5A7878;white-space:nowrap;}
-.hdrsync .sdot{width:7px;height:7px;}
-.btn-gear{background:rgba(255,255,255,.06)!important;border:1px solid rgba(255,255,255,.1)!important;color:#7A9898!important;font-size:1rem!important;padding:.38rem .65rem!important;border-radius:8px!important;line-height:1;cursor:pointer;}
-.btn-gear:hover{background:rgba(255,255,255,.13)!important;color:var(--cream)!important;}
 .btn-lang{background:rgba(201,169,110,.15)!important;border:1px solid rgba(201,169,110,.35)!important;color:var(--gold)!important;font-family:'Tajawal',sans-serif!important;font-size:.9rem!important;letter-spacing:0!important;text-transform:none!important;padding:.45rem 1rem!important;border-radius:50px!important;}
 .btn-lang:hover{background:rgba(201,169,110,.28)!important;transform:none!important;}
 .btn-out{background:rgba(181,69,60,.15)!important;border:1px solid rgba(181,69,60,.3)!important;color:#F09090!important;font-size:.8rem!important;letter-spacing:.05em!important;padding:.45rem 1rem!important;border-radius:50px!important;font-family:'DM Sans',sans-serif!important;text-transform:uppercase!important;cursor:pointer;}
@@ -241,38 +199,6 @@ tbody td{padding:.85rem 1rem;color:var(--dark);}
 </head>
 <body id="body">
 
-<!-- ════ GITHUB MODAL ════ -->
-<div class="gh-ov" id="gh-ov">
-  <div class="gh-box">
-    <h2>⚙ GitHub Sync</h2>
-    <p>Connect a private GitHub repository to automatically sync all clinic data across every device in real-time.</p>
-    <div class="gh-f">
-      <label>Personal Access Token</label>
-      <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off"/>
-      <div class="gh-help">Create at <a href="https://github.com/settings/tokens/new" target="_blank">github.com/settings/tokens</a> — tick <strong>repo</strong> scope only.</div>
-    </div>
-    <div class="gh-f">
-      <label>Repository (owner/repo)</label>
-      <input type="text" id="gh-repo" placeholder="username/clinic-data"/>
-      <div class="gh-help">A private repo you own. Can be empty — the app creates <code style="color:var(--gold)">data.json</code> automatically.</div>
-    </div>
-    <div class="gh-f">
-      <label>Branch</label>
-      <input type="text" id="gh-branch" placeholder="main"/>
-    </div>
-    <div class="gh-err" id="gh-err"></div>
-    <div class="gh-footer">
-      <button class="btn-ghok" id="gh-ok-btn" onclick="ghConnect()">Connect</button>
-      <button class="btn-ghx" onclick="ghClose()">Cancel</button>
-      <button class="btn-ghd" id="gh-dis-btn" onclick="ghDisconnect()" style="display:none;">Disconnect</button>
-    </div>
-    <div class="gh-stat">
-      <span class="sdot" id="gh-mdot"></span>
-      <span id="gh-mtxt">Not connected</span>
-    </div>
-  </div>
-</div>
-
 <!-- ════ LOGIN ════ -->
 <div id="login-screen">
   <div class="lcard">
@@ -294,10 +220,6 @@ tbody td{padding:.85rem 1rem;color:var(--dark);}
     </div>
     <div class="lerr" id="login-err"></div>
     <button class="lbtn" onclick="doLogin()" id="ll-btn">Sign In</button>
-    <div class="lsync">
-      <span class="sdot" id="l-sdot"></span>
-      <span id="l-stxt">No sync configured</span>
-    </div>
     <button class="llang" onclick="toggleLang()" id="ll-lang">🌐 العربية</button>
   </div>
 </div>
@@ -311,8 +233,6 @@ tbody td{padding:.85rem 1rem;color:var(--dark);}
       <button onclick="showTab('appointment',this)" data-key="navAppointment" id="nav-apt">Appointment</button>
       <button onclick="showTab('dashboard',this)" data-key="navDashboard" id="nav-dash">Dashboard</button>
       <span class="rbadge" id="role-badge">Doctor</span>
-      <div class="hdrsync"><span class="sdot" id="h-sdot"></span><span id="h-stxt">No sync</span></div>
-      <button class="btn-gear" onclick="ghOpen()" title="GitHub Sync">⚙</button>
       <button class="btn-exp" onclick="exportJSON()" id="btn-exp">⬇ Export</button>
       <label class="btn-imp" id="lbl-imp">⬆ Import<input type="file" accept=".json" onchange="importJSON(event)" style="display:none;"></label>
       <button class="btn-lang" onclick="toggleLang()" id="h-lang">🌐 العربية</button>
@@ -368,7 +288,6 @@ tbody td{padding:.85rem 1rem;color:var(--dark);}
       <div class="card">
         <h2 class="ctitle" id="apt-title">Book Appointment</h2>
         <p class="csub" id="apt-sub">Choose appointment type, then select a patient.</p>
-        <!-- Step 1: type -->
         <div style="margin-bottom:2rem;">
           <div id="lbl-apt-type" style="font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin-bottom:.75rem;">Appointment Type <span class="req">*</span></div>
           <div style="display:flex;gap:1rem;flex-wrap:wrap;">
@@ -376,7 +295,6 @@ tbody td{padding:.85rem 1rem;color:var(--dark);}
             <button class="apt-type-btn" id="btn-tnew" onclick="selAptType('new',this)"><span class="ico">🦷</span><span id="lbl-new-apt">New Appointment</span></button>
           </div>
         </div>
-        <!-- Step 2: patient + calendar (hidden until type chosen) -->
         <div id="apt-body" style="display:none;">
           <div class="fgrid" style="margin-bottom:1.2rem;">
             <div class="field full">
@@ -384,7 +302,6 @@ tbody td{padding:.85rem 1rem;color:var(--dark);}
               <select id="apt-patient" onchange="onPatSel()"><option value="" id="oap">Select registered patient</option></select>
             </div>
           </div>
-          <!-- patient record card -->
           <div id="pr-card" style="display:none;background:var(--teal-pale);border:1.5px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem;margin-bottom:1.5rem;">
             <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem;">
               <strong id="pr-name" style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--dark);"></strong>
@@ -469,13 +386,45 @@ let patients=[], appointments=[], lang='en';
 let calDate=new Date(), selDate=null, selSlot=null;
 let curRole=null, selLoginRole='doctor', aptType=null;
 
-// ══════ GITHUB STATE ══════
-let GH={token:'',repo:'',branch:'main',file:'data.json',sha:''};
-let ghOn=false, ghTimer=null, ghPoll=null;
-
 const TIMES=['08:00 AM','08:30 AM','09:00 AM','09:30 AM','10:00 AM','10:30 AM',
   '11:00 AM','11:30 AM','12:00 PM','01:00 PM','01:30 PM','02:00 PM',
   '02:30 PM','03:00 PM','03:30 PM','04:00 PM','04:30 PM','05:00 PM'];
+
+// ══════ LOCAL STORAGE PERSISTENCE ══════
+const LS_KEY = 'clinic_data';
+
+function saveData() {
+  try {
+    const payload = {
+      patients,
+      appointments: appointments.map(a => ({
+        ...a,
+        rawDate: a.rawDate ? a.rawDate.toISOString() : null
+      }))
+    };
+    localStorage.setItem(LS_KEY, JSON.stringify(payload));
+  } catch(e) {
+    console.warn('Could not save data:', e);
+  }
+}
+
+function loadData() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    patients = data.patients || [];
+    appointments = (data.appointments || []).map(a => ({
+      ...a,
+      rawDate: a.rawDate ? new Date(a.rawDate) : new Date()
+    }));
+  } catch(e) {
+    console.warn('Could not load data:', e);
+  }
+}
+
+// Load data immediately on startup
+loadData();
 
 // ══════ TRANSLATIONS ══════
 const T={
@@ -528,7 +477,6 @@ const T={
     treg:'✓ Patient Registered',
     tinc:'⚠️ Incomplete', minc:'Please select appointment type, patient, date and time.',
     tbook:'✓ Appointment Booked',
-    syncOn:'Synced', syncBusy:'Syncing…', syncErr:'Sync error', syncOff:'No sync',
     hExp:'⬇ Export', hImp:'⬆ Import',
     months:['January','February','March','April','May','June','July','August','September','October','November','December'],
     days:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
@@ -582,156 +530,14 @@ const T={
     treg:'✓ تم تسجيل المريض',
     tinc:'⚠️ غير مكتمل', minc:'يرجى اختيار نوع الموعد والمريض والتاريخ والوقت.',
     tbook:'✓ تم حجز الموعد',
-    syncOn:'تمت المزامنة', syncBusy:'جارٍ المزامنة…', syncErr:'خطأ في المزامنة', syncOff:'لا توجد مزامنة',
     hExp:'⬇ تصدير', hImp:'⬆ استيراد',
     months:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],
     days:['أحد','اثن','ثلا','أرب','خمس','جمع','سبت'],
   }
 };
 
-// ══════ GITHUB SYNC ══════
-const ghUrl=()=>`https://api.github.com/repos/${GH.repo}/contents/${GH.file}`;
-const ghHdr=()=>({'Authorization':`token ${GH.token}`,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'});
-
-function setSdot(state){  // 'on'|'busy'|'err'|'off'
-  ['h-sdot','gh-mdot','l-sdot'].forEach(id=>{
-    const el=document.getElementById(id); if(el){el.className='sdot';if(state!=='off')el.classList.add(state);}
-  });
-  const t=T[lang];
-  const txt=state==='on'?t.syncOn:state==='busy'?t.syncBusy:state==='err'?t.syncErr:t.syncOff;
-  ['h-stxt','l-stxt'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=txt;});
-  const mt=document.getElementById('gh-mtxt');
-  if(mt) mt.textContent=ghOn?`Connected: ${GH.repo}`:txt;
-}
-
-async function ghLoad(){
-  try{
-    const r=await fetch(ghUrl()+`?ref=${GH.branch}&_=${Date.now()}`,{headers:ghHdr()});
-    if(r.status===404){GH.sha='';patients=[];appointments=[];return true;}
-    if(!r.ok) return false;
-    const j=await r.json();
-    GH.sha=j.sha;
-    const raw=JSON.parse(atob(j.content.replace(/\n/g,'')));
-    patients=raw.patients||[];
-    appointments=(raw.appointments||[]).map(a=>({...a,rawDate:a.rawDate?new Date(a.rawDate):new Date()}));
-    return true;
-  }catch(e){return false;}
-}
-
-async function ghPush(){
-  setSdot('busy');
-  const payload={patients,appointments:appointments.map(a=>({...a,rawDate:a.rawDate?a.rawDate.toISOString():null}))};
-  const body={message:`sync ${new Date().toISOString()}`,content:btoa(unescape(encodeURIComponent(JSON.stringify(payload,null,2)))),branch:GH.branch};
-  if(GH.sha) body.sha=GH.sha;
-  try{
-    const r=await fetch(ghUrl(),{method:'PUT',headers:ghHdr(),body:JSON.stringify(body)});
-    if(!r.ok){setSdot('err');return false;}
-    GH.sha=(await r.json()).content.sha;
-    setSdot('on');return true;
-  }catch(e){setSdot('err');return false;}
-}
-
-function ghSchedule(){
-  if(!ghOn) return;
-  setSdot('busy');
-  clearTimeout(ghTimer);
-  ghTimer=setTimeout(ghPush,1500);
-}
-
-function ghStartPoll(){
-  if(ghPoll) clearInterval(ghPoll);
-  ghPoll=setInterval(async()=>{
-    if(!ghOn) return;
-    const pl=patients.length,al=appointments.length;
-    if(await ghLoad()){
-      setSdot('on');
-      if(patients.length!==pl||appointments.length!==al){
-        updPatDrop();
-        if(document.getElementById('panel-dashboard').classList.contains('active')) refreshDash();
-      }
-    }
-  },30000);
-}
-
-// ── Modal ──
-function ghOpen(){
-  document.getElementById('gh-token').value=GH.token;
-  document.getElementById('gh-repo').value=GH.repo;
-  document.getElementById('gh-branch').value=GH.branch||'main';
-  document.getElementById('gh-err').style.display='none';
-  document.getElementById('gh-dis-btn').style.display=ghOn?'inline-block':'none';
-  document.getElementById('gh-mtxt').textContent=ghOn?`Connected: ${GH.repo}`:'Not connected';
-  document.getElementById('gh-mdot').className='sdot'+(ghOn?' on':'');
-  document.getElementById('gh-ov').classList.add('open');
-}
-function ghClose(){document.getElementById('gh-ov').classList.remove('open');}
-
-async function ghConnect(){
-  const token=document.getElementById('gh-token').value.trim();
-  const repo=document.getElementById('gh-repo').value.trim();
-  const branch=document.getElementById('gh-branch').value.trim()||'main';
-  const errEl=document.getElementById('gh-err');
-  const btn=document.getElementById('gh-ok-btn');
-  errEl.style.display='none';
-  if(!token){errEl.textContent='Token is required.';errEl.style.display='block';return;}
-  if(!repo.includes('/')){errEl.textContent='Use owner/repo format.';errEl.style.display='block';return;}
-  btn.disabled=true; btn.innerHTML='<span class="spinn"></span>Connecting…';
-  document.getElementById('gh-mdot').className='sdot busy';
-  document.getElementById('gh-mtxt').textContent='Connecting…';
-  GH={token,repo,branch,file:'data.json',sha:''};
-  const ok=await ghLoad();
-  if(!ok){
-    errEl.textContent='Could not connect. Check your token, repo name, and that the repo exists.';
-    errEl.style.display='block';
-    btn.disabled=false; btn.textContent='Connect';
-    document.getElementById('gh-mdot').className='sdot err';
-    document.getElementById('gh-mtxt').textContent='Connection failed';
-    return;
-  }
-  ghOn=true;
-  localStorage.setItem('gh_cfg',JSON.stringify({token,repo,branch}));
-  updPatDrop();
-  if(document.getElementById('panel-dashboard').classList.contains('active')) refreshDash();
-  setSdot('on');
-  document.getElementById('gh-dis-btn').style.display='inline-block';
-  document.getElementById('gh-mtxt').textContent=`Connected: ${repo}`;
-  btn.disabled=false; btn.textContent='Connect';
-  ghStartPoll();
-  setTimeout(ghClose,700);
-}
-
-function ghDisconnect(){
-  ghOn=false;
-  GH={token:'',repo:'',branch:'main',file:'data.json',sha:''};
-  localStorage.removeItem('gh_cfg');
-  if(ghPoll) clearInterval(ghPoll);
-  setSdot('off');
-  document.getElementById('gh-dis-btn').style.display='none';
-  document.getElementById('gh-token').value='';
-  document.getElementById('gh-repo').value='';
-  document.getElementById('gh-mtxt').textContent='Disconnected';
-  document.getElementById('gh-mdot').className='sdot';
-}
-
-// ── Auto-load saved config ──
-(function ghInit(){
-  try{
-    const s=JSON.parse(localStorage.getItem('gh_cfg')||'null');
-    if(s&&s.token&&s.repo){
-      GH={token:s.token,repo:s.repo,branch:s.branch||'main',file:'data.json',sha:''};
-      ghOn=true;
-      setSdot('busy');
-      ghLoad().then(ok=>{
-        setSdot(ok?'on':'err');
-        if(ok){updPatDrop();ghStartPoll();}
-      });
-    }
-  }catch(e){}
-})();
-
 // ══════ EXPORT / IMPORT ══════
 function exportJSON(){
-  const t=T[lang];
   const payload={exportedAt:new Date().toISOString(),patients,appointments:appointments.map(a=>({...a,rawDate:a.rawDate?a.rawDate.toISOString():null}))};
   const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
   const url=URL.createObjectURL(blob);
@@ -749,6 +555,7 @@ function importJSON(event){
       if(!data.patients||!data.appointments) throw new Error();
       patients=data.patients;
       appointments=data.appointments.map(a=>({...a,rawDate:a.rawDate?new Date(a.rawDate):new Date()}));
+      saveData();
       updPatDrop();
       if(document.getElementById('panel-dashboard').classList.contains('active')) refreshDash();
       showToast(lang==='ar'?'✓ تم الاستيراد':'✓ Imported',
@@ -789,7 +596,6 @@ document.getElementById('login-pass').addEventListener('keydown',e=>{if(e.key===
 document.getElementById('login-user').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
 
 function doLogout(){
-  if(ghPoll) clearInterval(ghPoll);
   curRole=null;
   document.getElementById('app').style.display='none';
   document.getElementById('login-screen').style.display='flex';
@@ -863,8 +669,6 @@ function applyLang(){
   st('slbl-pts',t.slblPts); st('slbl-apts',t.slblApts); st('slbl-up',t.slblUp);
   st('dash-pts',t.dashPts); st('dash-apts',t.dashApts);
   ['th1','th2','th3','th4','th6','th7','th8','th9','th14','th11','th12','th13'].forEach(k=>st(k,t[k]));
-  // Sync dot text
-  setSdot(ghOn?'on':'off');
   if(curRole) applyRole();
   updPatDrop(); buildCal(); updSum();
   if(document.getElementById('panel-dashboard').classList.contains('active')) refreshDash();
@@ -916,11 +720,11 @@ function registerPatient(){
     meds:document.getElementById('meds').value.trim(),
     conditions:document.getElementById('conditions').value.trim(),
     attended:false,registered:new Date().toLocaleDateString(lang==='ar'?'ar-EG':'en-GB')});
+  saveData();
   updPatDrop();
   ['fname','lname','dob','phone','email','address','natid','allergies','meds','conditions'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
   document.getElementById('gender').selectedIndex=0;
   showToast(t.treg,`${fname} ${lname}`);
-  ghSchedule();
 }
 
 function updPatDrop(){
@@ -1038,6 +842,7 @@ function bookApt(){
   appointments.push({id:nid,patientId:parseInt(patId),patientName:p?`${p.fname} ${p.lname}`:'',
     aptType,typeLabel:tl,date:selDate.toLocaleDateString(locale),time:selSlot,
     notes:document.getElementById('apt-notes').value,status:t.confirmed,rawDate:new Date(selDate)});
+  saveData();
   showToast(t.tbook,`${p?p.fname:''} — ${selSlot}`);
   document.getElementById('apt-patient').selectedIndex=0;
   document.getElementById('apt-notes').value='';
@@ -1049,7 +854,6 @@ function bookApt(){
   document.getElementById('apt-body').style.display='none';
   document.querySelectorAll('.apt-type-btn').forEach(b=>b.classList.remove('sel'));
   buildCal();
-  ghSchedule();
 }
 
 // ══════ DASHBOARD ══════
@@ -1077,7 +881,9 @@ function refreshDash(){
 
 function toggleAtt(id){
   const p=patients.find(p=>p.id===id); if(!p) return;
-  p.attended=!p.attended; refreshDash(); ghSchedule();
+  p.attended=!p.attended;
+  saveData();
+  refreshDash();
 }
 
 document.getElementById('apt-patient').addEventListener('change',updSum);
